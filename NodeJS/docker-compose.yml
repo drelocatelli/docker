@@ -7,7 +7,7 @@ services:
     image: redis:alpine
     restart: always
     ports:
-    - "${REDIS_PORT}:6379"
+    - "${REDIS_PORT:-0}:6379"
   database:
     container_name: database
     image: mysql:8.0
@@ -20,7 +20,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_ALLOW_EMPTY_USER: 'yes'
     ports:
-      - ${DB_PORT}:3306
+      - ${DB_PORT:-0}:3306
     volumes:
       - my-db:/var/lib/mysql
 volumes:
