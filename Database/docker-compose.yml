@@ -1,0 +1,29 @@
+# Use root/example as user/password credentials
+version: '3.7'
+
+services:
+  cache:
+    container_name: redis
+    image: redis:alpine
+    restart: always
+    ports:
+    - "${REDIS_PORT:-0}:6379"
+  database:
+    container_name: database
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ALLOW_EMPTY_USER: 'yes'
+    ports:
+      - ${DB_PORT:-0}:3306
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:
+  cache:
+    driver: local
