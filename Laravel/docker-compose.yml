@@ -17,7 +17,6 @@ services:
     volumes:
       - my-db:/var/lib/mysql
   cache:
-    container_name: redis
     image: redis:alpine
     restart: always
     ports:
