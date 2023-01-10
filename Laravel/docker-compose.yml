@@ -5,21 +5,16 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
-      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_ALLOW_EMPTY_USER: 'yes'
     ports:
-      - ${DB_PORT:-0}:3306
+      - '${DB_PORT:-0}:3306'
     volumes:
       - my-db:/var/lib/mysql
-  cache:
-    image: redis:alpine
-    restart: always
-    ports:
-    - "${REDIS_PORT:-0}:6379"
   app:
     image: docker.io/bitnami/laravel:9
     ports:
@@ -27,8 +22,8 @@ services:
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT:-0}
-      - DB_USERNAME=${DB_USER}
-      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_DATABASE=${DB_DATABASE}
     volumes:
       - './:/app'
     depends_on:
