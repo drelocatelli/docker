@@ -4,7 +4,6 @@ services:
   apache:
     image: 'php:7.4-apache'
     container_name: php
-    restart: always
     ports:
       - '${WEB_PORT:-0}:80'
     volumes:
