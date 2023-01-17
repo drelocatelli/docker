@@ -1,6 +1,19 @@
 version: "3.7"
 
 services:
+  web:
+    build: .
+    ports:
+      - '${WEB_PORT:-0}:8000'
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT:-0}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_DATABASE=${DB_DATABASE}
+    volumes:
+      - '.:/app'
+    depends_on:
+      - db
   db:
     image: mysql:8.0
     environment:
@@ -14,19 +27,6 @@ services:
       - '${DB_PORT:-0}:3306'
     volumes:
       - my-db:/var/lib/mysql
-  app:
-    image: docker.io/bitnami/laravel:9
-    ports:
-      - '${WEB_PORT:-0}:8000'
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT:-0}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_DATABASE=${DB_DATABASE}
-    volumes:
-      - '.:/app'
-    depends_on:
-      - db
 volumes:
   my-db:
   cache:
