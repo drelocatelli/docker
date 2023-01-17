@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  web:
-    build: .
+  app:
+    image: docker.io/bitnami/laravel:9
     ports:
       - '${WEB_PORT:-0}:8000'
     environment:
