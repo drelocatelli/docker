@@ -3,7 +3,6 @@ version: "3.7"
 services:
   database:
     image: mysql:8.0
-    command: mysqld --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USERNAME}
@@ -24,9 +23,11 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_PASSWORD=${DB_PASSWORD}
     volumes:
-      - '.:/app'
+      - './${PROJECT_NAME:-project}:/app'
     depends_on:
       - database
+  
+  
 volumes:
   mysql-data:
   cache:
