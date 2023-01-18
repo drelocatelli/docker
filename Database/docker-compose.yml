@@ -9,6 +9,7 @@ services:
     ports:
     - "${REDIS_PORT:-0}:6379"
   database:
+    command: mysqld --default-authentication-plugin=mysql_native_password
     container_name: database
     image: mysql:8.0
     restart: always
