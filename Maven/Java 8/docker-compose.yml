@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    api:
+        working_dir: /home/usr/app
+        container_name: api
+        image: maven:3-adoptopenjdk-8
+        ports:
+            - "8080:8080"
+        volumes:
+            - "./:/home/usr/app"
+        command: mvn spring-boot:run
