@@ -14,6 +14,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
   app:
+    build: .
     image: docker.io/bitnami/laravel:9
     ports:
       - '${WEB_PORT:-0}:8000'
