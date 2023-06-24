@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - './:/app'
+        restart: always
+        ports:
+            - '${WEB_PORT:-0}:3000'
