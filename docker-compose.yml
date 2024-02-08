@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  apache:
+    build: .
+    image: 'php:8.3-apache'
+    container_name: php
+    ports:
+      - '${WEB_PORT:-0}:80'
+    volumes:
+      - ./www:/var/www/html
