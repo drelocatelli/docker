@@ -7,19 +7,19 @@ services:
         ports:
             - '${WEB_PORT:-0}:80'
         environment:
-            - WORDPRESS_DB_HOST=db
-            - WORDPRESS_DB_USER=${DB_USERNAME}
-            - WORDPRESS_DB_PASSWORD=${DB_PASSWORD}
-            - WORDPRESS_DB_NAME=${DB_DATABASE}
+            - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+            - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+            - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+            - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
         volumes:
             - '.:/var/www/html'
     db:
         image: mysql:5.7
         restart: always
         environment:
-            - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_USER=${DB_USERNAME}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+            - MYSQL_USER=${WORDPRESS_DB_USER}
+            - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         ports:
             - '${DB_PORT:-0}:80'
