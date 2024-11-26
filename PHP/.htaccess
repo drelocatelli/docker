@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Reescreve qualquer outro asset para o subdiretório dinâmico
+    RewriteCond %{REQUEST_URI} ^/(css|js|img|assets|fonts|media|images|.*)$ [NC]
+    RewriteRule ^(.*)$ /%{ENV:TARGET_DIR}/$1 [L]
+</IfModule>
